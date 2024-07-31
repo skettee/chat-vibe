@@ -43,22 +43,6 @@
     // stream
     let EventSource = undefined
 
-    // recents chats
-    export let data
-    $: if(data.id) {
-        // console.log('data.id: ', data.id)
-        // check valid session and save session to store
-        db.session.get({id: data.id}).then((sess) => {
-            if(sess) {
-                sessionStorage.session = JSON.stringify({
-                    id: sess.id,
-                    char: $user.char
-                })
-                state.toInitial()
-            }
-        })
-    }
-
     // fsm
     const state = fsm( 'initial', {
         initial: {
@@ -114,9 +98,9 @@
                                 })
                             return id
                         })
-                        .then( (data) => { 
+                        .then( (id) => { 
                             sessionStorage.session = JSON.stringify($session)
-                            return data
+                            return id
                         })
                         .then( this.success )
                         .catch( this.error )

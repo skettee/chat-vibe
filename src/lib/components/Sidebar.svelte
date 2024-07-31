@@ -76,7 +76,7 @@
                 {#each ($sessions || []) as session (session.id)}
                     {#if session.title}
                     <div class="w-full pr-2 relative group">
-                        <a class="w-full flex justify-between rounded-xl px-3 py-2 whitespace-nowrap text-ellipsis 
+                        <!-- <a class="w-full flex justify-between rounded-xl px-3 py-2 whitespace-nowrap text-ellipsis 
                             {disabled? '': 'group-hover:bg-gray-100 dark:group-hover:bg-gray-850'}" 
                             href={disabled? "javascript:void(0)" : `/${session.id}`} 
                             draggable="false" 
@@ -88,7 +88,25 @@
                             <div class="flex self-center flex-1 w-full">
                                 <div class="text-left self-center overflow-hidden w-full h-[20px]">{session.title}</div>
                             </div>
-                        </a>
+                        </a> -->
+                        <button class=" w-full flex px-2 py-2 rounded-xl {disabled? '': 'cursor-pointer group-hover:bg-gray-100 dark:group-hover:bg-gray-850 transition'}"
+                            on:click={() => {
+                                if ($mobile) {
+                                    showSidebar.set(false);
+                                }
+                                // restore session from db
+                                sessionStorage.session = JSON.stringify({
+                                    id: session.id,
+                                    char: session.char
+                                })
+                                // go to inital state
+                                state.toInitial()
+                            }}
+                        >
+                            <div class="flex self-center flex-1 w-full whitespace-nowrap text-ellipsis">
+                                <div class="text-left self-center overflow-hidden w-full h-[20px]">{session.title}</div>
+                            </div>
+                        </button>
                     </div>
                     {/if}
                 {/each}

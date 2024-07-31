@@ -1,6 +1,6 @@
-# Chat Boom
+# Chat Vibe
 
-Chat Boom is a more friendly and emotional chatbot than other LLM's.  The character AI will respond your request in a way that makes sense to you.
+Chat Vibe is a more friendly and emotional chatbot than other LLM's.  The character AI will respond your request in a way that makes sense to you.
 
 ![screenshot01](./doc/screenshot_01.jpg)
 
@@ -12,21 +12,21 @@ Chat Boom is a more friendly and emotional chatbot than other LLM's.  The charac
 - 🕵️ Dual View: Displaying Agent and other LLM's original response on seperated window, You can easily reference it.
 - 🛡️ Local Data Storage: Using browser managed storage and database, your data remains on your device.
 - 📜 Markdown Support: Enhanced readability with markdown and syntax highlighting capabilities.
-- 🌟 And more... : Constantly improving Chat Boom with new features!
+- 🌟 And more... : Constantly improving Chat Vibe with new features!
 
 ## How to install
 
 - Clone the repository from Github
 ```bash
 
-git clone https://github.com/skettee/chat-boom.git
+git clone https://github.com/skettee/chat-vibe.git 
 
 ```
 
 - Install dependencies
 ```bash
 
-cd chat-boom
+cd chat-vibe
 npm install
 
 ```

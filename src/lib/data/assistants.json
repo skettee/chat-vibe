@@ -1,0 +1,13 @@
+{
+    "assistant": {
+        "name": "Agent",
+        "provider": "anthropic",
+        "image": "./claude.png"
+    },
+
+    "web_search": {
+        "name": "web_search",
+        "provider": "perplexity",
+        "image": "./perplexity.png"
+    }
+}

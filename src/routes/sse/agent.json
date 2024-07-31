@@ -1,0 +1,12 @@
+{
+	"system_tpl": "Answer as many questions as you can using your existing knowledge.\nOnly web search for queries that you can not confidently answer.\nToday's date is ${today}\nIf you think a user's question involves something in the future that hasn't happened yet, use web search tool.\n",
+	"system_var": ["${today}"],
+	"url": "https://api.anthropic.com/v1/messages",
+	"headers": {
+		"anthropic-version": "2023-06-01"
+	},
+	"data": {
+		"model": "claude-3-5-sonnet-20240620",
+		"max_tokens": 2048
+	}
+}

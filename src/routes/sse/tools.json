@@ -1,0 +1,26 @@
+{
+	"web_search": {
+		"perplexity": {
+			"url": "https://api.perplexity.ai/chat/completions",
+			"data": {
+				"model": "llama-3-sonar-small-32k-online"
+			}
+		}
+	},
+    "tools": [
+        {
+            "name": "web_search",
+            "description": "A tool to retrieve up to date information on a given message by searching the web",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "description": "The message to search the web for"
+                    }
+                },
+                "required": ["message"]
+            }
+        }
+    ]
+}

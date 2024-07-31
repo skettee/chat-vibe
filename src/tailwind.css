@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	html,
+	pre {
+		font-family: -apple-system, 'Arimo', ui-sans-serif, system-ui, 'Segoe UI', Roboto, Ubuntu,
+			Cantarell, 'Noto Sans', sans-serif, 'Helvetica Neue', Arial, 'Apple Color Emoji',
+			'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+	}
+
+	pre {
+		white-space: pre-wrap;
+	}
+}
+
+@layer utilities {
+	.scrollbar::-webkit-scrollbar {
+	  @apply w-2 h-2;
+	}
+  
+	.scrollbar::-webkit-scrollbar-track {
+	  @apply rounded-full bg-stone-200 dark:bg-gray-900;
+	}
+  
+	.scrollbar::-webkit-scrollbar-thumb {
+	  @apply rounded-full bg-stone-300 dark:bg-gray-800;
+	}
+  
+	.scrollbar::-webkit-scrollbar-thumb:hover {
+	  @apply bg-stone-500;
+	}
+}

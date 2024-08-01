@@ -5,7 +5,7 @@ export const showLogin = writable(false)
 
 // Sidebar
 export const mobile = writable(false)
-export const showSidebar = writable(true)
+export const showSidebar = writable(false)
 
 // Chat Info
 export const user = writable({

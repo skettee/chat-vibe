@@ -1,6 +1,6 @@
 <script>
     import {user, showLogin} from '$lib/store.js'
-    import { onMount } from 'svelte';
+    import { onMount, tick } from 'svelte';
     let name = ''
 
     const handleSubmit = () => {
@@ -18,8 +18,9 @@
 
     let nameInputElement
 
-    onMount(()=>{
-        window.setTimeout(() => nameInputElement?.focus(), 0)
+    onMount( async() => {
+        await tick()
+        nameInputElement.focus()
     })
 
 </script>

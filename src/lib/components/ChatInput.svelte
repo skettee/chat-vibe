@@ -1,5 +1,5 @@
 <script>
-    import { onMount, tick, getContext } from 'svelte';
+    import { onMount, tick, getContext, afterUpdate } from 'svelte';
 
     export let prompt
     export let handleSubmit
@@ -16,8 +16,14 @@
 
     $: disabled = $state != 'ready'
 
-    onMount(() => {
-        window.setTimeout(() => chatTextAreaElement?.focus(), 0)
+    // onMount( async () => {
+    //     await tick()
+    //     chatTextAreaElement.focus()
+    // })
+
+    afterUpdate( async ()=>{
+        await tick()
+        chatTextAreaElement.focus()
     })
 
 </script>

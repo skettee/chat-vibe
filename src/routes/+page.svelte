@@ -15,24 +15,24 @@
 	import Navbar from '$lib/components/Navbar.svelte';
     import Placeholder from "$lib/components/Placeholder.svelte"
 
-    onMount(() => {
-        mobile.subscribe((e) => {
-			if ($showSidebar && e) {
-				showSidebar.set(false);
-			}
+    // onMount(() => {
+    //     mobile.subscribe((e) => {
+	// 		if ($showSidebar && e) {
+	// 			showSidebar.set(false);
+	// 		}
 
-			if (!$showSidebar && !e) {
-				showSidebar.set(true);
-			}
-		});
+	// 		if (!$showSidebar && !e) {
+	// 			showSidebar.set(true);
+	// 		}
+	// 	});
 
-        if(showLogin) {
-            showSidebar.set(false);
-        }
-        else {
-            showSidebar.set(window.innerWidth > BREAKPOINT);
-        }
-    })
+    //     if(showLogin) {
+    //         showSidebar.set(false);
+    //     }
+    //     else {
+    //         showSidebar.set(window.innerWidth > BREAKPOINT);
+    //     }
+    // })
 
     // messages
     let prompt = ''

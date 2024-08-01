@@ -1,6 +1,6 @@
 <script>
-    import "../../tailwind.css"
-    import '../../app.css'
+    import "../tailwind.css"
+    import '../app.css'
     import {showLogin, mobile, showSidebar} from '$lib/store.js'
     import {BREAKPOINT} from '$lib/constants.js'
 	import LoginView from "$lib/components/LoginView.svelte";

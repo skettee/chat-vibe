@@ -75,7 +75,7 @@
                             const userChatList = chatMessages.filter((chat) => chat.role === 'user')
                             if (userChatList.length > 0) {
                                 const chatId = userChatList[userChatList.length-1].id
-                                console.log('chatId: ', chatId)
+                                // console.log('chatId: ', chatId)
                                 const agentList = await db.agent.orderBy("timestamp").filter(agent => agent.chatId === chatId).toArray()
                                 agentMessages = await agentList
                                 // console.log('transaction agentMessages:', agentMessages)
@@ -138,7 +138,7 @@
                 const requestHistoryMessage = agentHistoryMessages.map((item)=>{
                     return { role: item.role, content: item.content }
                 })
-                console.log('state (agent) request messages: ', requestHistoryMessage)
+                // console.log('state (agent) request messages: ', requestHistoryMessage)
 
                 EventSource = new SSE('/sse', {
                     headers: {
@@ -190,7 +190,7 @@
             _enter() {
                 const messages = [{ role: 'user', content: tool_input.message}]
 
-                console.log('state (tools) request messages: ', messages)
+                // console.log('state (tools) request messages: ', messages)
 
                 EventSource = new SSE('/sse', {
                     headers: {
@@ -233,8 +233,8 @@
                     return { role: item.role, content: item.content }
                 })
 
-                console.log('state (persona) request messages: ', requestChatMessage)
-                console.log('state (persona) reference messages: ', requestAgentMessage)
+                // console.log('state (persona) request messages: ', requestChatMessage)
+                // console.log('state (persona) reference messages: ', requestAgentMessage)
 
                 EventSource = new SSE('/sse', {
                     headers: {
@@ -301,7 +301,7 @@
     async function handleListener(e) {
         const eventType = e.type
         let stream
-        console.log('handleListener: ', $state)
+        // console.log('handleListener: ', $state)
 
         switch($state) {
             case 'agent':
@@ -506,9 +506,9 @@
         await db.chat.add(chatMessage)
         await db.history.add(chatMessage)
 
-        console.log('handleSubmit(chat): ', chatMessages)
-        console.log('handleSubmit(agent): ', agentHistoryMessages)
-        console.log('handleSubmit(state): ', $state)
+        // console.log('handleSubmit(chat): ', chatMessages)
+        // console.log('handleSubmit(agent): ', agentHistoryMessages)
+        // console.log('handleSubmit(state): ', $state)
         
         await tick();
 		scrollToBottom(messagesContainerElement);

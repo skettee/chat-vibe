@@ -4,6 +4,15 @@ Chat Vibe is a more friendly and emotional chatbot than other LLM's.  The charac
 
 ![screenshot01](./doc/screenshot_01.jpg)
 
+## Why Chat Vibe?
+
+It was developed to solve two problems.
+
+- LLM is boring.
+  - LLM is too boring and list-like. It was developed to convey knowledge in a way that is easy to understand and lively for the general public.
+- Character AI is a Liar.
+  - Character AI talks about things it doesn't know as if it does. In order to deliver the most accurate information to the user, we use various LLMs, including web search, to collect and organize information.
+
 ## Features
 
 - 🎭 Character AI: Conveying knowledges in an easy and friendly way. Expressing dynamic emotions and actions. Easily adding new characters on your own.

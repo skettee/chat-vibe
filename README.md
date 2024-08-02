@@ -2,7 +2,7 @@
 
 Chat Vibe is a more friendly and emotional chatbot than other LLM's.  The character AI will respond your request in a way that makes sense to you.
 
-![screenshot01](./doc/screenshot_01.jpg)
+https://github.com/user-attachments/assets/84eb51d8-a9b9-4c89-a43b-3ae8dbc783a3
 
 ## Why Chat Vibe?
 

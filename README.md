@@ -8,14 +8,14 @@ https://github.com/user-attachments/assets/84eb51d8-a9b9-4c89-a43b-3ae8dbc783a3
 
 It was developed to solve two problems.
 
-- LLM is boring.
+- LLM is Boring.
   - LLM is too boring and list-like. It was developed to convey knowledge in a way that is easy to understand and lively for the general public.
 - Character AI is a Liar.
   - Character AI talks about things it doesn't know as if it does. In order to deliver the most accurate information to the user, we use various LLMs, including web search, to collect and organize information.
 
 ## Features
 
-- 🎭 Character AI: Conveying knowledges in an easy and friendly way. Expressing dynamic emotions and actions. Easily adding new characters on your own.
+- 🎭 Character AI: Conveying knowledges in an easy and friendly way. Expressing dynamic emotions and actions. Using OpenAI GPT-4o mini.
 - 🦸 Agent: Core AI systems for reasoning and calling other LLMs to adjust response. Using Anthropic Claude 3.5 Sonnet.
 - 🔎 Web Search: Agent call web search LLM if needed. Using Perplexity.
 - 🕵️ Dual View: Displaying Agent and other LLM's original response on seperated window, You can easily reference it.
@@ -47,6 +47,7 @@ npm install
 # add your api keys
 ANTHROPIC_API_KEY=your-anthropic-api-key
 PERPLEXITY_API_KEY=your-pplx-api-key
+OPENAI_API_KEY=your-openai-api-key
 
 ```
 

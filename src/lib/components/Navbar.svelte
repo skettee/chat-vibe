@@ -9,7 +9,7 @@
 
 </script>
 
-<nav id="nav" class="sticky py-2.5 top-0 flex flex-row justify-center z-10">
+<nav id="nav" class="sticky py-2.5 top-0 flex flex-row justify-center z-30">
     <div class=" flex max-w-full w-full mx-auto px-5 pt-0.5 md:px-[1rem]">
         <div class="flex items-center w-full max-w-full">
             <div class="flex-1 overflow-hidden max-w-full">
@@ -35,7 +35,7 @@
                                     </DropdownMenu.Trigger>
                                     <DropdownMenu.Content 
                                         class=" {$mobile? `w-full`: `w-[30rem]`} max-w-[calc(100vw-1rem)] justify-start rounded-xl  bg-white dark:bg-gray-850 dark:text-white 
-                                                shadow-lg border border-gray-300/30 dark:border-gray-700/50  outline-none"
+                                                shadow-lg border border-gray-300/30 dark:border-gray-700/50 outline-none z-50"
                                         side={$mobile ? 'bottom' : 'bottom-start'} 
                                         sideOffset={4}
                                     >

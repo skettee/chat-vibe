@@ -13,5 +13,5 @@
 </script>
 
 {#if code}
-<pre class="hljs p-2 overflow-x-auto scrollbar"><code class="language-{lang} whitespace-pre">{@html highlightedCode || code}</code></pre>
+<pre class="hljs p-2 overflow-x-auto scrollbar"><code class="language-{lang} whitespace-pre-line">{@html highlightedCode || code}</code></pre>
 {/if}

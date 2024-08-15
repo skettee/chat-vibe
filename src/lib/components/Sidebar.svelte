@@ -29,7 +29,7 @@
 
 <div class="h-screen max-h-[100dvh] min-h-screen select-none {$showSidebar
     ? 'md:relative w-[260px]'
-    : '-translate-x-[260px] w-[0px] '} bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-200 text-sm transition fixed z-30 top-0 left-0 rounded-r-2xl">
+    : '-translate-x-[260px] w-[0px] '} bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-200 text-sm transition fixed z-40 top-0 left-0 rounded-r-2xl">
     
     <div
         class="py-2.5 my-auto flex flex-col justify-between h-screen max-h-[100dvh] w-[260px] z-50 {$showSidebar
@@ -69,7 +69,7 @@
         </div>
         <!-- Recents -->
         <div class="relative flex flex-col flex-1 overflow-y-auto">
-            <div class="pl-2 my-2 flex-1 flex flex-col space-y-1 overflow-y-auto scrollbar-none">
+            <div class="pl-2 my-2 flex-1 flex flex-col space-y-1 overflow-y-auto scrollbar scrollbar-none">
                 <div class="w-full pl-2.5 text-base text-gray-500 dark:text-gray-500 font-bold pt-5 pb-0.5">
                     Recents
                 </div>

@@ -2,6 +2,7 @@
     import { getContext, tick, onMount } from 'svelte';
     import fsm from 'svelte-fsm';
     import { SSE } from 'sse.js'
+    import { Toaster, toast } from 'svelte-sonner';
     import ChatInput from '$lib/components/ChatInput.svelte';
     import ChatView from '$lib/components/ChatView.svelte';
 	import AgentView from '$lib/components/AgentView.svelte';
@@ -15,30 +16,23 @@
 	import Navbar from '$lib/components/Navbar.svelte';
     import Placeholder from "$lib/components/Placeholder.svelte"
 
-    // onMount(() => {
-    //     mobile.subscribe((e) => {
-	// 		if ($showSidebar && e) {
-	// 			showSidebar.set(false);
-	// 		}
-
-	// 		if (!$showSidebar && !e) {
-	// 			showSidebar.set(true);
-	// 		}
-	// 	});
-
-    //     if(showLogin) {
-    //         showSidebar.set(false);
-    //     }
-    //     else {
-    //         showSidebar.set(window.innerWidth > BREAKPOINT);
-    //     }
-    // })
+    import { fade } from 'svelte/transition';
 
     // messages
     let prompt = ''
     let chatMessages = []  // chat messages
     let agentMessages = [] // agent messages
     let agentHistoryMessages = [] // agent history messages
+    let expressionMessage = ''
+    let expressionTemplate = ''
+
+    let currentCharExpression = charactersJson[$user.char].expression.waiting.image
+
+    $: if(expressionMessage) {
+        // console.log(expressionMessage)
+
+        handleExpression(expressionMessage)
+    }
 
     // stream
     let EventSource = undefined
@@ -291,11 +285,17 @@
     let currentMessages = []
     let start_stream = false
 
+    let expressionText = ''
+    let isExpression = false
+    let startPattern = /\*([^]*)/
+    let endPattern = /(.*?)\*/
+
     function handleError(err) {
-        console.log(err)
+        // console.log(err)
+        const errData = JSON.parse(err.data)
+        toast(`❗Error: ${errData?.error.message}`)
         // error and goto initial
         state.error(err)
-
     }
 
     async function handleListener(e) {
@@ -458,6 +458,28 @@
                         break
                     case 'content_block_delta':
                         stream = JSON.parse(e.data)
+                        const delta = stream.delta.text
+                        // console.log(delta)
+                        // expression match
+                        if(isExpression) {
+                            const match = delta.match(endPattern)
+                            if(match) {
+                                expressionText += match[1]
+                                expressionMessage = expressionText
+                                expressionText = ''
+                                isExpression = false
+                            }
+                            else {
+                                expressionText += delta
+                            }
+                        }
+                        else {
+                            const match = delta.match(startPattern)
+                            if(match) {
+                                expressionText += match[1]
+                                isExpression = true
+                            }
+                        }
                         answer = (answer ?? '') + stream.delta.text
                         chatMessages = [...currentMessages, { role: 'assistant', content: answer }]
                         tick().then(() => scrollToBottom(messagesContainerElement))
@@ -477,9 +499,46 @@
                         answer = ''
                         state.toReady()
                         break
+                    case 'message':
+                        // TBD for OpenAI
+                        break
                 }
                 break
         }
+    }
+
+    function handleExpression(message) {
+        // expression template
+        expressionTemplate = ''
+        for (let [key,value] of Object.entries(charactersJson[$user.char].expression)) {
+            //console.log(key, value);
+            expressionTemplate += `- ${key}: ${value.description}\n`
+        }
+
+        // console.log(expressionTemplate)
+
+        fetch('/express', {
+            method: 'POST',
+            body: JSON.stringify({
+                'expressTemplate': expressionTemplate,
+                'message': message
+            }),
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+        .then( function(response) {
+            return response.json()
+        })
+        .then( function(data) {
+            // console.log(data)
+            const content = JSON.parse(data.choices[0].message.content)
+            // console.log(content)
+            const selectedExpression =content.selected_expression
+            // console.log(selectedExpression)
+            currentCharExpression = charactersJson[$user.char].expression[`${selectedExpression}`]?.image
+            return data
+        })
     }
 
     let messagesContainerElement;
@@ -541,9 +600,17 @@
             bind:this={messagesContainerElement}
             class="pb-2.5 flex flex-col justify-between w-full flex-auto overflow-auto scrollbar h-0 max-w-full">
             <!-- Views -->
-            <div class="relative flex flex-row"> 
+            <div class="relative flex flex-row">
                 <!-- ChatView -->
                 <div class="relative mx-auto flex h-full w-full max-w-3xl flex-1 flex-col md:px-2">
+                    <div class="sticky px-5 top-0 h-[240px] z-10">
+                        <!-- Char View -->
+                        <img transition:fade
+                        src={currentCharExpression}
+                        class="max-w-[240px] object-cover rounded-xl bg-[#b37eb5]"
+                        alt="profile"
+                        draggable="false">
+                    </div>
                     <ChatView bind:chatMessages/>
                 </div> 
                 <!-- AgentView -->
@@ -552,12 +619,12 @@
                         <AgentView bind:agentMessages/>
                     </div>
                 </div>
-                
             </div>
         </div>
     {/if}
     </div>
 </div>
 <ChatInput bind:prompt {handleSubmit} {state}/>
+<Toaster/>
 
 

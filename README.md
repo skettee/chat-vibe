@@ -15,7 +15,8 @@ It was developed to solve two problems.
 
 ## Features
 
-- 🎭 Character AI: Conveying knowledges in an easy and friendly way. Expressing dynamic emotions and actions. Using OpenAI GPT-4o mini.
+- 🎭 Character AI: Conveying knowledges in an easy and friendly way. 
+- 😀 Emotional Character: Expressing dynamic emotions and actions. Using OpenAI GPT-4o mini.
 - 🦸 Agent: Core AI systems for reasoning and calling other LLMs to adjust response. Using Anthropic Claude 3.5 Sonnet.
 - 🔎 Web Search: Agent call web search LLM if needed. Using Perplexity.
 - 🕵️ Dual View: Displaying Agent and other LLM's original response on seperated window, You can easily reference it.

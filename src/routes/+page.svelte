@@ -25,8 +25,9 @@
     let agentHistoryMessages = [] // agent history messages
     let expressionMessage = ''
     let expressionTemplate = ''
+    let currentCharExpression
 
-    let currentCharExpression = charactersJson[$user.char].expression.waiting.image
+    let isPlaceholder = false
 
     $: if(expressionMessage) {
         // console.log(expressionMessage)
@@ -46,6 +47,7 @@
                 if(browser) {
                     if(localStorage.user) {
                         $user = JSON.parse(localStorage.user)
+                        currentCharExpression = charactersJson[$user.char].expression.waiting.image
                     }
                     else {
                         // modal open
@@ -59,6 +61,9 @@
                             // chatMessages
                             const chatList = await db.chat.orderBy("timestamp").filter(chat => chat.sessionId === $session.id).toArray()
                             chatMessages = await chatList
+                            if(chatMessages.length > 0) {
+                                isPlaceholder = false
+                            }
                             // console.log('transaction chatMessages:', chatMessages)
                             // agentHistoryMessages
                             const historyList = await db.history.orderBy("timestamp").filter(history => history.sessionId === $session.id).toArray()
@@ -79,6 +84,8 @@
                         .catch( this.error )
                     }
                     else {
+                        isPlaceholder = true
+
                         console.log('create session')
                         db.session.add({
                             id: uuidv4(),
@@ -548,6 +555,8 @@
     }; 
     
     const handleSubmit = async (userPrompt) => {
+        isPlaceholder = false
+
         const chatMessage = { 
             id: uuidv4(),
             timestamp: Date.now(),
@@ -592,7 +601,7 @@
     <!-- Nav -->
     <Navbar {state}/>
     <div class="flex flex-col flex-auto">
-    {#if chatMessages.length == 0}
+    {#if isPlaceholder || chatMessages.length == 0}
         <Placeholder />
     {:else}
         <!-- Message Container -->
@@ -607,7 +616,7 @@
                         <!-- Char View -->
                         <img transition:fade
                         src={currentCharExpression}
-                        class="max-w-[240px] object-cover rounded-xl bg-[#b37eb5]"
+                        class="max-w-[240px] object-cover rounded-xl"
                         alt="profile"
                         draggable="false">
                     </div>

@@ -1,5 +1,5 @@
 {
-	"system_tpl": "You will be provided with user input such as emotional expression.\nBased on the user input, identify the most likely value of the parameters to match user's emotional expression.\n\nHere is a description of the parameters:\n- selected_expression: select the most likely key of the emotional expression list.\n\nHere are the emotional expression list:\n${express_template}\n\nIf none of these list are relevant, select 'waiting'\n\nHere is a example:\n- user input: She giggles softly\n- selected_expression: giggle\n",
+	"system_tpl": "You will be provided with user input such as emotional expression.\nBased on the user input, identify the most likely value of the parameters to match user's emotional expression.\n\nHere is a description of the parameters:\n- selected_expression: select the most likely key of the emotional expression list.\n\nHere are the emotional expression list:\n${express_template}\n\nIf none of these list are relevant, select 'waiting'\n\nHere is a example:\n- user input: He gestures grandly, his eyes twinkling with curiosity\n- selected_expression: waiting\n",
 	"system_var": ["${express_template}"],
 	"url": "https://api.openai.com/v1/chat/completions",
 	"data": {

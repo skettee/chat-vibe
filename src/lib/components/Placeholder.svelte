@@ -2,6 +2,14 @@
     import { fade } from 'svelte/transition';
     import {user} from '$lib/store.js'
     import charactersJson from '$lib/data/characters.json'
+    import { onMount } from 'svelte';
+
+    onMount(() => {
+        if(localStorage.user) {
+            $user = JSON.parse(localStorage.user)
+        }
+    })
+
 </script>
 
 <div class="m-auto w-full max-w-5xl px-8 lg:px-24 pb-16">
@@ -9,7 +17,7 @@
         <!-- Zuru hello image -->
         <img 
             src={charactersJson[$user.char].greeting.image}
-            class="max-w-[240px] object-cover rounded-xl bg-[#b37eb5]"
+            class="max-w-[240px] object-cover rounded-xl"
             alt="profile"
             draggable="false"> 
     </div>

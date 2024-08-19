@@ -51,7 +51,8 @@
 				                                draggable="false"
                                                 on:click={() => {
                                                     // save char and restart chat
-                                                    if(!disabled) {
+                                                    if(!disabled && $user.char != key) {
+                                                        $user.char = key
                                                         localStorage.user = JSON.stringify(
                                                         {
                                                             name: $user.name,

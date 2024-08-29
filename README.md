@@ -2,9 +2,10 @@
 
 Chat Vibe is a more friendly and emotional chatbot than other LLM's.  The character AI will respond your request in a way that makes sense to you.
 
-https://github.com/user-attachments/assets/098b5fd0-1ccd-4f75-9b9c-602e5d9f58b7
+https://github.com/user-attachments/assets/524d65aa-5fe4-4d23-b9eb-7e0a687e56fb
 
 ## 🔥 Updates
+- **`2024/08/29`**: Applied a 3D character. Have fun chatting with 3D character AI!
 - **`2024/08/19`**: I've added Shakespeare. For more details, check [**here**](https://skettee.github.io/chat-vibe/2024/08/19/add-shakespeare.html) (in Korean).
 
 ## Why Chat Vibe?

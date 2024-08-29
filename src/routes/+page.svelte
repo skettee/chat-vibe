@@ -8,7 +8,6 @@
 	import AgentView from '$lib/components/AgentView.svelte';
     import charactersJson from '$lib/data/characters.json'
     import { user, session, chat, showLogin, mobile, showSidebar } from '$lib/store.js'
-    import { BREAKPOINT } from '$lib/constants.js'
     import { browser } from '$app/environment'
     import { db } from "$lib/db"
     import { v4 as uuidv4 } from 'uuid'
@@ -16,7 +15,8 @@
 	import Navbar from '$lib/components/Navbar.svelte';
     import Placeholder from "$lib/components/Placeholder.svelte"
 
-    import { fade } from 'svelte/transition';
+    // 3d model
+    import { initVRM, setEmotion } from '$lib/model.js'
 
     // messages
     let prompt = ''
@@ -25,7 +25,7 @@
     let agentHistoryMessages = [] // agent history messages
     let expressionMessage = ''
     let expressionTemplate = ''
-    let currentCharExpression
+    let currentCharExpression = "neutral"
 
     let isPlaceholder = false
 
@@ -47,7 +47,7 @@
                 if(browser) {
                     if(localStorage.user) {
                         $user = JSON.parse(localStorage.user)
-                        currentCharExpression = charactersJson[$user.char].expression.waiting.image
+                        // currentCharExpression = charactersJson[$user.char].expression.waiting.image
                     }
                     else {
                         // modal open
@@ -519,7 +519,7 @@
         expressionTemplate = ''
         for (let [key,value] of Object.entries(charactersJson[$user.char].expression)) {
             //console.log(key, value);
-            expressionTemplate += `- ${key}: ${value.description}\n`
+            expressionTemplate += `- ${key}: ${value}\n`
         }
 
         // console.log(expressionTemplate)
@@ -541,9 +541,10 @@
             // console.log(data)
             const content = JSON.parse(data.choices[0].message.content)
             // console.log(content)
-            const selectedExpression =content.selected_expression
-            // console.log(selectedExpression)
-            currentCharExpression = charactersJson[$user.char].expression[`${selectedExpression}`]?.image
+            // const selectedExpression =content.selected_expression
+            // currentCharExpression = charactersJson[$user.char].expression[`${selectedExpression}`]?.image
+            currentCharExpression = content.selected_expression
+            setEmotion(currentCharExpression)
             return data
         })
     }
@@ -614,11 +615,9 @@
                 <div class="relative mx-auto flex h-full w-full max-w-3xl flex-1 flex-col md:px-2">
                     <div class="sticky px-5 top-0 h-[240px] z-10">
                         <!-- Char View -->
-                        <img transition:fade
-                        src={currentCharExpression}
-                        class="max-w-[240px] object-cover rounded-xl"
-                        alt="profile"
-                        draggable="false">
+                        <canvas id="canvas" class="rounded-xl" use:initVRM={{modelURL: charactersJson[$user.char].model, 
+                            clipsURL: charactersJson[$user.char].clips, 
+                            initAction: currentCharExpression}}></canvas>
                     </div>
                     <ChatView bind:chatMessages/>
                 </div> 
